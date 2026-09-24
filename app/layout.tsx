@@ -1,6 +1,8 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
 import './globals.css'
+import { ThemeProvider } from '@/components/theme-provider'
+
 
 export const metadata: Metadata = {
   title: '洪睦荃 | MuChuan Hung – Frontend Engineer',
@@ -26,8 +28,11 @@ export const metadata: Metadata = {
 }
 
 export const viewport: Viewport = {
-  colorScheme: 'dark',
-  themeColor: [{ media: '(prefers-color-scheme: dark)', color: '#000000' }],
+  colorScheme: 'light dark',
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f4f1eb' },
+    { media: '(prefers-color-scheme: dark)', color: '#12100e' },
+  ],
 }
 
 export default function RootLayout({
@@ -36,9 +41,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-Hant" suppressHydrationWarning>
       <body className="antialiased">
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          {children}
+        </ThemeProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
