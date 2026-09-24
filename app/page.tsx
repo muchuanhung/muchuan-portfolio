@@ -1,7 +1,8 @@
 'use client'
 
 import { useMemo, useState } from 'react'
-import { ArrowUpRight, BriefcaseBusiness, GitBranch, Mail, Menu, X } from 'lucide-react'
+import { useTheme } from 'next-themes'
+import { ArrowUpRight, BriefcaseBusiness, GitBranch, Mail, Menu, Moon, Sun, X } from 'lucide-react'
 
 type Category = 'Web' | 'Mobile' | 'AI' | 'Writing-related tool'
 type Project = { id: string; title: string; kicker: string; description: string; category: Category; tags: string[]; tone: string; featured?: boolean; role: string; stack: string; year: string }
@@ -30,13 +31,14 @@ function ProjectCard({ project, onOpen }: { project: Project; onOpen: (p: Projec
 }
 
 export default function Page() {
+  const { resolvedTheme, setTheme } = useTheme()
   const [activeCategory, setActiveCategory] = useState<'All' | Category>('All')
   const [selectedProject, setSelectedProject] = useState<Project | null>(null)
   const [menuOpen, setMenuOpen] = useState(false)
   const filteredProjects = useMemo(() => activeCategory === 'All' ? projects : projects.filter((project) => project.category === activeCategory), [activeCategory])
 
   return <main>
-    <nav className="nav"><a href="#top" className="brand"><span className="brand-dot" />MCH / 洪睦荃</a><div className={`nav-links ${menuOpen ? 'is-open' : ''}`}><a href="#work" onClick={() => setMenuOpen(false)}>作品</a><a href="#writing" onClick={() => setMenuOpen(false)}>文章</a><a href="#about" onClick={() => setMenuOpen(false)}>關於我</a><a href="#contact" className="nav-cta" onClick={() => setMenuOpen(false)}>聯絡我 <ArrowUpRight size={15} /></a></div><button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>{menuOpen ? <X /> : <Menu />}</button></nav>
+    <nav className="nav"><a href="#top" className="brand"><span className="brand-dot" />MCH / 洪睦荃</a><div className={`nav-links ${menuOpen ? 'is-open' : ''}`}><a href="#work" onClick={() => setMenuOpen(false)}>作品</a><a href="#writing" onClick={() => setMenuOpen(false)}>文章</a><a href="#about" onClick={() => setMenuOpen(false)}>關於我</a><button className="theme-toggle" onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')} aria-label={resolvedTheme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}>{resolvedTheme === 'dark' ? <Sun /> : <Moon />}</button><a href="#contact" className="nav-cta" onClick={() => setMenuOpen(false)}>聯絡我 <ArrowUpRight size={15} /></a></div><button className="menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>{menuOpen ? <X /> : <Menu />}</button></nav>
 
     <section className="hero wrap" id="top"><div className="hero-label"><span className="status-dot" />AVAILABLE FOR SELECTED WORK</div><h1>把想法<br /><span>做成真的。</span></h1><div className="hero-bottom"><p className="hero-intro">我是洪睦荃，住在台北的<br /><strong>Frontend Engineer</strong>。<br />專注在把複雜的事，做得清楚又好用。</p><a href="#work" className="circle-arrow" aria-label="Scroll to selected work"><ArrowUpRight /></a></div></section>
 
