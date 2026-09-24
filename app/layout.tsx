@@ -1,13 +1,31 @@
 import { Analytics } from '@vercel/analytics/next'
 import type { Metadata, Viewport } from 'next'
-import './globals.css'
+import { Noto_Sans_TC } from 'next/font/google'
+import { SiteFooter } from '@/components/SiteFooter'
+import { SiteHeader } from '@/components/SiteHeader'
 import { ThemeProvider } from '@/components/theme-provider'
+import { siteConfig } from '@/config/site'
+import './globals.css'
 
+const notoSansTC = Noto_Sans_TC({
+  weight: ['400', '700', '900'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-noto-sans-tc',
+})
 
 export const metadata: Metadata = {
-  title: '洪睦荃 | MuChuan Hung – Frontend Engineer',
-  description: 'Frontend Engineer from Taipei. Building web & mobile experiences with Next.js, React, and AI integration.',
-  generator: 'v0.app',
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} | ${siteConfig.nameEn} – ${siteConfig.role}`,
+    template: `%s | ${siteConfig.name} ${siteConfig.nameEn}`,
+  },
+  description: siteConfig.description,
+  openGraph: {
+    type: 'website',
+    locale: 'zh_TW',
+    siteName: `${siteConfig.name} ${siteConfig.nameEn}`,
+  },
   icons: {
     icon: [
       {
@@ -41,10 +59,19 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="zh-Hant" suppressHydrationWarning>
-      <body className="antialiased">
+    // suppressHydrationWarning：next-themes 會在 hydration 前替 <html> 加上 .dark class
+    <html lang="zh-Hant" className={notoSansTC.variable} suppressHydrationWarning>
+      <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          {children}
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-full focus:bg-brand focus:px-4 focus:py-2 focus:font-bold focus:text-on-brand"
+          >
+            跳到主要內容
+          </a>
+          <SiteHeader />
+          <main id="main">{children}</main>
+          <SiteFooter />
         </ThemeProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
