@@ -7,7 +7,7 @@ import { getAllArticles } from '@/lib/content/articles'
 
 export const metadata: Metadata = {
   title: '文章',
-  description: '洪睦荃的技術文章與筆記，包含 Medium 上的完整系列。',
+  description: '洪睦筌的技術文章與筆記，包含 Medium 上的完整系列。',
 }
 
 export default function ArticlesPage() {

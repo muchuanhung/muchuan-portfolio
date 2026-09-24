@@ -10,7 +10,7 @@ import {
 
 export const metadata: Metadata = {
   title: '作品',
-  description: '洪睦荃的所有作品，可依分類與技術標籤篩選。',
+  description: '洪睦筌的所有作品，可依分類與技術標籤篩選。',
 }
 
 export default function ProjectsPage() {

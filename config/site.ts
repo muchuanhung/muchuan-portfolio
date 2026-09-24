@@ -2,13 +2,13 @@ export type SocialLink = { label: string; href: string }
 export type Experience = { org: string; focus?: string }
 
 export const siteConfig = {
-  name: '洪睦荃',
+  name: '洪睦筌',
   nameEn: 'MuChuan Hung',
   shortName: 'MCH',
   role: 'Frontend Engineer',
   location: 'Taipei',
   url: 'https://muchuan-portfolio.vercel.app',
-  description: '洪睦荃 MuChuan Hung，台北的 Frontend Engineer。用 Next.js、React 與 AI 把複雜的事做得清楚又好用。',
+  description: '洪睦筌 MuChuan Hung，台北的 Frontend Engineer。用 Next.js、React 與 AI 把複雜的事做得清楚又好用。',
   email: 'mu.chuan.hung@gmail.com',
 
   socials: [

@@ -7,7 +7,6 @@ import { TagList } from './Tag'
 
 type ProjectCardProps = {
   project: ProjectSummary
-  /** 用來交錯色塊封面的底色 */
   index?: number
   headingLevel?: 'h2' | 'h3'
 }

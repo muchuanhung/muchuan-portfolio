@@ -65,6 +65,235 @@
   margin-inline: auto;
 }
 
+/*
+ * Hero 插畫尺寸旋鈕（來自 aa65850）
+ * 調大小優先改這幾個變數即可
+ */
+.hero-art {
+  --hero-art-h: 430px;
+  --hero-art-h-sm: 330px;
+  --hero-art-radius: 34px;
+  --hero-art-radius-sm: 24px;
+  --hero-art-panel-h: 190px;
+  --hero-art-panel-h-sm: 150px;
+  --hero-art-panel-w: 55%;
+  --hero-art-scale: 1;
+
+  position: relative;
+  isolation: isolate;
+  min-height: var(--hero-art-h);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--hero-art-radius);
+  background: color-mix(in srgb, var(--surface) 68%, var(--canvas));
+  transform: scale(var(--hero-art-scale));
+  transform-origin: center center;
+}
+
+.art-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 34px 34px;
+  mask-image: linear-gradient(135deg, black, transparent 75%);
+}
+
+.art-path {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.art-path::before {
+  content: '';
+  position: absolute;
+  width: 150%;
+  height: 130px;
+  border: 2px solid var(--color-brand);
+  border-left: 0;
+  border-radius: 0 100px 100px 0;
+  transform: rotate(-25deg);
+  opacity: 0.85;
+}
+
+.art-path-one::before {
+  top: 112px;
+  left: -35%;
+}
+
+.art-path-two::before {
+  top: 235px;
+  left: -20%;
+  border-color: var(--fg);
+  opacity: 0.45;
+  transform: rotate(18deg);
+}
+
+.art-path span {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-brand);
+  box-shadow: 0 0 0 7px color-mix(in srgb, var(--color-brand) 20%, transparent);
+}
+
+.art-path-one span:nth-child(1) {
+  top: 109px;
+  left: 35%;
+}
+.art-path-one span:nth-child(2) {
+  top: 166px;
+  left: 63%;
+}
+.art-path-one span:nth-child(3) {
+  top: 238px;
+  right: 11%;
+}
+
+.art-path-two span:nth-child(1) {
+  top: 278px;
+  left: 18%;
+  background: var(--fg);
+}
+.art-path-two span:nth-child(2) {
+  top: 234px;
+  left: 52%;
+  background: var(--fg);
+}
+.art-path-two span:nth-child(3) {
+  top: 180px;
+  right: 12%;
+  background: var(--fg);
+}
+
+.art-panel {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 16px 16px 0 color-mix(in srgb, var(--fg) 10%, transparent);
+}
+
+.art-panel-back {
+  top: 66px;
+  right: 10%;
+  width: 56%;
+  height: var(--hero-art-panel-h);
+  padding: 21px;
+  border-radius: 18px;
+  background: var(--color-brand);
+  color: var(--color-on-brand);
+  transform: rotate(7deg);
+}
+
+.art-panel-front {
+  left: 9%;
+  bottom: 55px;
+  width: var(--hero-art-panel-w);
+  height: var(--hero-art-panel-h);
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--surface);
+  color: var(--fg);
+  transform: rotate(-7deg);
+}
+
+.art-panel-label {
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.art-panel-back strong {
+  font-size: clamp(1.7rem, 3vw, 2.7rem);
+  letter-spacing: -0.08em;
+  line-height: 0.84;
+}
+
+.art-bars {
+  display: flex;
+  align-items: end;
+  gap: 6px;
+  height: 58px;
+}
+
+.art-bars i {
+  display: block;
+  width: 18%;
+  background: var(--color-brand);
+  border-radius: 4px 4px 0 0;
+}
+
+.art-bars i:nth-child(1) {
+  height: 38%;
+}
+.art-bars i:nth-child(2) {
+  height: 68%;
+}
+.art-bars i:nth-child(3) {
+  height: 100%;
+}
+
+.art-panel-footer {
+  display: flex;
+  justify-content: space-between;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.04em;
+}
+
+.art-node {
+  position: absolute;
+  z-index: 2;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 3px solid var(--surface);
+  background: var(--color-brand);
+}
+
+.art-node-top {
+  top: 39px;
+  right: 14%;
+}
+
+.art-node-bottom {
+  bottom: 38px;
+  left: 7%;
+}
+
+@media (max-width: 700px) {
+  .hero-art {
+    min-height: var(--hero-art-h-sm);
+    border-radius: var(--hero-art-radius-sm);
+  }
+
+  .art-panel-back {
+    top: 45px;
+    right: 8%;
+    height: var(--hero-art-panel-h-sm);
+  }
+
+  .art-panel-front {
+    bottom: 34px;
+    left: 7%;
+    height: var(--hero-art-panel-h-sm);
+  }
+
+  .art-path-one::before {
+    top: 90px;
+  }
+
+  .art-path-two::before {
+    top: 185px;
+  }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;

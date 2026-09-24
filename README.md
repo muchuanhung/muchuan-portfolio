@@ -1,9 +1,8 @@
 # muchuan-portfolio
 
-洪睦荃 / MuChuan Hung 的個人站。Next.js App Router + Tailwind CSS v4 + MDX content layer。
+洪睦筌 / MuChuan Hung 的個人站。
 
 - 線上：https://muchuan-portfolio.vercel.app
-- v0 專案：[Continue working on v0 →](https://v0.app/chat/projects/prj_GNahYjEewTYgPcLvOcEqLchIG7Oc)
 
 ## 開發
 

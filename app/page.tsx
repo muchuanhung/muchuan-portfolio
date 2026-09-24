@@ -1,6 +1,6 @@
 import Link from 'next/link'
-import { ArrowDownRight } from 'lucide-react'
 import { ArticleCard } from '@/components/ArticleCard'
+import { HeroArt } from '@/components/HeroArt'
 import { NeonButton } from '@/components/NeonButton'
 import { ProjectCard } from '@/components/ProjectCard'
 import { SectionHeading } from '@/components/SectionHeading'
@@ -17,31 +17,30 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="wrap flex min-h-[640px] flex-col justify-between pt-28 pb-16 md:min-h-[700px] md:pt-36">
+      <section className="wrap flex flex-col gap-8 pt-28 pb-16 md:gap-9 md:pt-36">
         <p className="flex items-center gap-2.5 text-xs font-bold tracking-[.13em] text-muted">
           <span aria-hidden className="size-2.5 rounded-full bg-brand shadow-[0_0_12px_var(--color-brand)]" />
           {siteConfig.role.toUpperCase()} · {siteConfig.location.toUpperCase()}
         </p>
-        <h1 className="mt-8 text-[clamp(3.75rem,13vw,10.5rem)] leading-[0.95] font-black tracking-[-0.05em]">
-          把想法
-          <br />
-          <span className="text-highlight">做成真的。</span>
-        </h1>
-        <div className="mt-12 flex items-end justify-between gap-6">
-          <p className="text-base leading-relaxed text-muted md:text-lg">
-            我是{siteConfig.name}，住在台北的
-            <br />
-            <strong className="text-fg">{siteConfig.role}</strong>。
-            <br />
-            專注在把複雜的事，做得清楚又好用。
-          </p>
-          <Link
-            href="#work"
-            className="grid size-14 shrink-0 place-items-center rounded-full border border-line text-highlight transition hover:bg-brand hover:text-on-brand md:size-16"
-          >
-            <ArrowDownRight aria-hidden />
-            <span className="sr-only">往下看精選作品</span>
-          </Link>
+        <div className="grid flex-1 items-center gap-12 md:grid-cols-[minmax(0,1.08fr)_minmax(min(100%,390px),0.92fr)] md:gap-[clamp(40px,8vw,120px)]">
+          <div className="@container flex w-full min-w-0 flex-col items-start">
+            <h1 className="text-[clamp(3.25rem,min(12vw,18cqi),6.75rem)] leading-[0.92] font-black tracking-[-0.06em]">
+              把想法
+              <br />
+              <span className="text-highlight">做成真的。</span>
+            </h1>
+            <p className="mt-9 text-base leading-relaxed text-muted md:text-lg">
+              我是{siteConfig.name}，熱愛騎公路車的
+              <br />
+              <strong className="text-fg">{siteConfig.role}</strong>。
+              <br />
+              專注在把需求，變成可落地實現的產品。
+            </p>
+            <NeonButton href="#work" className="mt-7">
+              看看我的作品
+            </NeonButton>
+          </div>
+          <HeroArt />
         </div>
       </section>
 
