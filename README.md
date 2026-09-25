@@ -1,5 +1,7 @@
 # muchuan-portfolio
 
+[![muchuan-portfolio demo](docs/demo.gif)](https://muchuan-portfolio.vercel.app)
+
 洪睦筌 / MuChuan Hung 的個人站。
 
 - 線上：https://muchuan-portfolio.vercel.app
