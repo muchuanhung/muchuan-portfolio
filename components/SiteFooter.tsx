@@ -8,15 +8,16 @@ export function SiteFooter() {
           {siteConfig.name} / {siteConfig.nameEn}
         </span>
         <ul className="flex gap-5" aria-label="社群連結">
-          {siteConfig.socials.map((social) => (
-            <li key={social.label}>
+          {siteConfig.socials.map(({ label, href, icon: Icon }) => (
+            <li key={label}>
               <a
-                href={social.href}
+                href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="transition-colors hover:text-highlight"
+                className="inline-flex items-center gap-1.5 transition-colors hover:text-highlight"
               >
-                {social.label}
+                <Icon aria-hidden className="size-3.5 shrink-0" />
+                {label}
                 <span className="sr-only">（另開新視窗）</span>
               </a>
             </li>

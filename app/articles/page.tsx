@@ -5,13 +5,15 @@ import { SectionHeading } from '@/components/SectionHeading'
 import { getSocial } from '@/config/site'
 import { getAllArticles } from '@/lib/content/articles'
 
+export const revalidate = 3600
+
 export const metadata: Metadata = {
   title: '文章',
   description: '洪睦筌的技術文章與筆記，包含 Medium 上的完整系列。',
 }
 
-export default function ArticlesPage() {
-  const articles = getAllArticles()
+export default async function ArticlesPage() {
+  const articles = await getAllArticles()
 
   return (
     <div className="wrap pt-24 md:pt-32">
@@ -21,7 +23,7 @@ export default function ArticlesPage() {
         title="寫下來，"
         highlight="才算真的想過。"
         action={
-          <NeonButton href={getSocial('Medium').href} variant="outline">
+          <NeonButton href={getSocial('Medium').href} icon={getSocial('Medium').icon} variant="outline">
             Medium 全部文章
           </NeonButton>
         }

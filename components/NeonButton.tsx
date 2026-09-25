@@ -1,5 +1,6 @@
 import Link from 'next/link'
-import { ArrowUpRight } from 'lucide-react'
+import { ArrowDownToLine, ArrowUpRight } from 'lucide-react'
+import type { IconType } from 'react-icons'
 import { cn } from '@/lib/utils'
 
 type NeonButtonProps = {
@@ -9,6 +10,10 @@ type NeonButtonProps = {
   variant?: 'solid' | 'outline'
   size?: 'md' | 'lg'
   arrow?: boolean
+  /** 文字前的圖示（例如社群 logo） */
+  icon?: IconType
+  /** 下載檔案（例如 public/ 底下的 PDF）：改用一般 <a download>，圖示換成下載箭頭；傳字串可指定下載檔名 */
+  download?: boolean | string
   className?: string
 }
 
@@ -21,6 +26,8 @@ export function NeonButton({
   variant = 'solid',
   size = 'md',
   arrow = true,
+  icon: Icon,
+  download,
   className,
 }: NeonButtonProps) {
   const classes = cn(
@@ -31,25 +38,42 @@ export function NeonButton({
       : 'border border-line text-fg hover:border-highlight hover:text-highlight',
     className,
   )
-  const icon = arrow && (
+  const arrowIcon = arrow && (
     <ArrowUpRight aria-hidden className="size-[1.15em] shrink-0 transition-transform group-hover:rotate-45" />
   )
+  const label = Icon ? (
+    <span className="inline-flex items-center gap-2">
+      <Icon aria-hidden className="size-[1.1em] shrink-0" />
+      {children}
+    </span>
+  ) : (
+    children
+  )
+
+  if (download) {
+    return (
+      <a href={href} download={download === true ? '' : download} className={classes}>
+        {label}
+        {arrow && <ArrowDownToLine aria-hidden className="size-[1.15em] shrink-0" />}
+      </a>
+    )
+  }
 
   if (isExternal(href)) {
     const newTab = href.startsWith('http')
     return (
       <a href={href} className={classes} {...(newTab && { target: '_blank', rel: 'noopener noreferrer' })}>
-        {children}
+        {label}
         {newTab && <span className="sr-only">（另開新視窗）</span>}
-        {icon}
+        {arrowIcon}
       </a>
     )
   }
 
   return (
     <Link href={href} className={classes}>
-      {children}
-      {icon}
+      {label}
+      {arrowIcon}
     </Link>
   )
 }

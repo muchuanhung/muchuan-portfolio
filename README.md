@@ -50,6 +50,8 @@ links:
   demo: https://example.com  # 選填
   github: https://github.com/muchuanhung/my-app  # 選填
 cover: /projects/my-app.png  # 選填，圖片放 public/projects/；沒有就顯示色塊封面
+mark: ☼                      # 選填，色塊中間的大符號；不填會自動分配且不重複（最多 7 種）
+tone: violet                 # 選填，色塊底色 brand / invert / violet / coral；不填依順序輪流
 featured: true               # 選填，true 才會出現在首頁
 publishedAt: 2026-09-24      # YYYY-MM-DD，列表依此由新到舊排序
 ---

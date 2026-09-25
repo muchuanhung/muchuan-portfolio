@@ -10,14 +10,15 @@ import { formatDate, getExternalSourceName } from '@/lib/format'
 
 type Props = { params: Promise<{ slug: string }> }
 
-export const dynamicParams = false
+export const revalidate = 3600
+export const dynamicParams = true
 
-export function generateStaticParams() {
-  return getAllArticles().map((article) => ({ slug: article.slug }))
+export async function generateStaticParams() {
+  return (await getAllArticles()).map((article) => ({ slug: article.slug }))
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const article = getArticleBySlug((await params).slug)
+  const article = await getArticleBySlug((await params).slug)
   if (!article) return {}
   return {
     title: article.title,
@@ -28,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function ArticlePage({ params }: Props) {
-  const article = getArticleBySlug((await params).slug)
+  const article = await getArticleBySlug((await params).slug)
   if (!article) notFound()
 
   const source = article.externalUrl ? getExternalSourceName(article.externalUrl) : null

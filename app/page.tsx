@@ -4,15 +4,18 @@ import { HeroArt } from '@/components/HeroArt'
 import { NeonButton } from '@/components/NeonButton'
 import { ProjectCard } from '@/components/ProjectCard'
 import { SectionHeading } from '@/components/SectionHeading'
-import { getSocial, siteConfig } from '@/config/site'
+import { EmailIcon, getSocial, siteConfig } from '@/config/site'
 import { getFeaturedArticles } from '@/lib/content/articles'
 import { getFeaturedProjects, toProjectSummary } from '@/lib/content/projects'
 
+/** Medium RSS ISR；必須是字面量數字，Next 才能靜態分析 segment config */
+export const revalidate = 3600
+
 const marqueeItems = ['FRONTEND ENGINEER', 'NEXT.JS / REACT', 'REACT NATIVE', 'AI WORKFLOW', 'TAIPEI']
 
-export default function HomePage() {
+export default async function HomePage() {
   const projects = getFeaturedProjects().map(toProjectSummary)
-  const articles = getFeaturedArticles()
+  const articles = await getFeaturedArticles()
 
   return (
     <>
@@ -132,10 +135,10 @@ export default function HomePage() {
           <span className="text-highlight">有趣的事。</span>
         </h2>
         <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-          <NeonButton href={`mailto:${siteConfig.email}`} size="lg" className="sm:min-w-[360px]">
+          <NeonButton href={`mailto:${siteConfig.email}`} size="lg" icon={EmailIcon} className="sm:min-w-[360px]">
             {siteConfig.email}
           </NeonButton>
-          <NeonButton href={getSocial('LinkedIn').href} size="lg" variant="outline">
+          <NeonButton href={getSocial('LinkedIn').href} size="lg" icon={getSocial('LinkedIn').icon} variant="outline">
             LinkedIn
           </NeonButton>
         </div>

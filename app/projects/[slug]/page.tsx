@@ -95,7 +95,7 @@ export default async function ProjectPage({ params }: Props) {
           <h2 className="mb-8 text-2xl font-black tracking-tight">相關作品</h2>
           <div className="grid gap-5 md:grid-cols-2">
             {related.map((p, i) => (
-              <ProjectCard key={p.slug} project={toProjectSummary(p)} index={i} />
+              <ProjectCard key={p.slug} project={toProjectSummary(p)} index={i} compact />
             ))}
           </div>
         </section>
