@@ -4,8 +4,6 @@
 
 洪睦筌 / MuChuan Hung 的個人站。
 
-- 線上：https://muchuan-portfolio.vercel.app
-
 ## 開發
 
 需要 Node.js **20.9 以上**（`.nvmrc` 指定 22）與 pnpm。
