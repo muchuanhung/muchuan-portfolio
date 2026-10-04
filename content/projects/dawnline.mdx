@@ -1,0 +1,28 @@
+---
+title: 曉行 Dawnline
+summary: 出發前判讀台灣單車、跑步與越野路線的天氣與路況風險，沿 GPX 軌跡給出安全／注意／危險／未判定的判讀。
+category: AI
+role: 全端開發
+tags: ["GPX", "Next.js", "Weather", "Map"]
+stack: ["TypeScript", "Next.js", "React", "Tailwind CSS", "Firebase", "Inngest", "CWB", "TDX", "Strava API"]
+links:
+  demo: https://strava-sync-alpha.vercel.app
+  github: https://github.com/muchuanhung/Velorder_AI
+featured: true
+publishedAt: 2026-09-24
+---
+
+曉行 Dawnline 沿 GPX 軌跡每 0.5 km 取樣反查行政區，依騎經各路段的預估時間（20 km/h）挑選 CWB 鄉鎮預報時段，再套上測站雨量與 TDX 路況事件，對每條路線給出「安全／注意／危險／未判定」的判讀；天氣缺漏或沿線縣市路況取不到時判為未判定，不宣稱安全。
+
+## 功能
+
+- **今日判讀**：各路線的判定、示警路段與 ETA 降雨時段，天氣卡片優先採用定位 3 km 內的測站雨量。
+- **路線示警**：高度圖、依里程對應的行政區路段、沿線 CCTV。
+- **降雨地圖**：全台縣市降雨預報。
+- **Strava 串接**：以 Inngest 背景工作同步活動資料。
+
+## 技術
+
+Next.js 16（App Router）、React 19、TypeScript、Tailwind CSS v4、Firebase Authentication／Firestore／Storage、Inngest，資料來源為 CWB 開放資料與 TDX，行政區反查採內建鄉鎮 TopoJSON 本地 point-in-polygon，部署於 Vercel。
+
+（GitHub repo 沿用舊名 `Velorder_AI`，產品名稱為曉行 Dawnline。）
